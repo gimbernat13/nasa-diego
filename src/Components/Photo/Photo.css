@@ -1,0 +1,12 @@
+#photo {
+  width: 60vw;
+  height: 100vh;
+  color: white;
+  background:#222;
+}
+
+.RoverPhoto {
+    height: 80vh;
+    margin: 0 auto;
+    text-align: center;
+}

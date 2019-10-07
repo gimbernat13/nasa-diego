@@ -1,5 +1,7 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: .9em;
 }
 
 .App-logo {
@@ -20,3 +22,11 @@
 .App-link {
   color: #09d3ac;
 }
+
+.text-center{
+  text-align: center;
+}
+.text-justify {
+  text-align: justify;
+}
+

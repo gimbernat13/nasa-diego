@@ -1,0 +1,27 @@
+#InfoPanel{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40vw;
+    height: 100vh;
+    background-color: #fff;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 500;
+    -webkit-box-shadow: -7px 0 21px -8px rgba(0, 0, 0, .65);
+    -moz-box-shadow: -7px 0 21px -8px rgba(0, 0, 0, .65);
+    box-shadow: -7px 0 21px -8px rgba(0, 0, 0, .65);
+}
+
+#InfoPanel hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #ccc;
+    margin: 0 0 1em;
+    padding: 0;
+}
+
+.InfoPanelContainer {
+    margin: 50px;
+}
