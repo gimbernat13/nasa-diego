@@ -1,3 +1,12 @@
 .MissionDetails {
     /* margin-top: 70px; */
 }
+
+.status {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.deepsky {
+    color: deepskyblue;
+}

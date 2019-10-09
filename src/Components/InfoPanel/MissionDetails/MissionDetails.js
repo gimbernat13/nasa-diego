@@ -1,29 +1,70 @@
-import React from "react";
+import React, { Component } from "react";
 import "./MissionDetails.css";
-const MissionDetails = () => {
-  return (
-    <div>
-      <h3>Mission Details</h3>
-      <h5>Curiosity Rover</h5>
+import axios from "axios";
+import Photo from "./Photo/Photo";
+const API_KEY = "XV3ByWizINpFWnvtkhbEupv6ejBkAL8jAcFSWKnW";
 
-      <ul>
-        <li>Launch Date: </li>
-        <li>Landing Date: </li>
-        <li>Status: </li>
-        <li>lihotos taken By XXXX </li>
-      </ul>
+class MissionDetails extends Component {
+  state = {
+    rover: this.props.rover,
+    formattedDate: this.props.formattedDate,
+    manifest: null,
+    launchDate: null,
+    landingDate: null,
+    status: null,
+    totalPhotos: null
+  };
+  fetchApiData() {
+    axios
+      .get(
+        `https://api.nasa.gov/mars-photos/api/v1/manifests/${this.props.rover}?api_key=${API_KEY}`
+      )
+      .then(response => {
+        const manifest = response.data.photo_manifest;
+        this.setState({ manifest: manifest });
+        this.setState({ launchDate: manifest.launch_date });
+        this.setState({ landingDate: manifest.landing_date });
+        this.setState({ status: manifest.status });
+        this.setState({ totalPhotos: manifest.total_photos });
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  componentDidMount() {
+    console.log("component mounted");
 
-      <p>
-        <strong>Description</strong>
-      </p>
-      <p className="text-justify">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum atque
-        neque laboriosam ea odio. Debitis consectetur molestiae blanditiis
-        similique, nisi aut doloribus. Sapiente qui explicabo sunt doloribus
-        esse, ipsa fuga?
-      </p>
-    </div>
-  );
-};
+    this.fetchApiData();
+  }
+
+  componentDidUpdate() {
+    console.log("component updated");
+    if (this.state.rover && this.state.rover !== this.props.rover) {
+      this.setState({ rover: this.props.rover });
+
+      
+      this.fetchApiData();
+    }
+  }
+  render() {
+    const manifest = this.state.manifest;
+    return (
+      <div key={this.props.rover}>
+        <h3 key={this.props.rover}><span  className="deepsky">{this.state.rover}</span> Rover</h3>
+        <h5>Mission Details</h5>
+        <ul>
+          <li>Launch Date: {this.state.launchDate} </li>
+          <li>Landing Date: {this.state.landingDate} </li>
+          <li>Total photos taken by Rover: {this.state.totalPhotos} </li>
+          {/* <li key={this.props.rover} >Status:{this.state.manifest.status}  </li> */}
+          <li className="status">Mission Status: {this.state.status} </li>
+        </ul>
+      
+      </div>
+    );
+  }
+}
 
 export default MissionDetails;
+// https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?manifests/curiosity&api_key=XV3ByWizINpFWnvtkhbEupv6ejBkAL8jAcFSWKnW

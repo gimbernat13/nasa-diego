@@ -8,12 +8,12 @@ import MissionDetails from "./MissionDetails/MissionDetails";
 
 export default class InfoPanel extends Component {
   state = {
-    rover: null,
+    rover: "Curiosity",
     startDate: new Date(),
     setStartDate: new Date(),
     formattedDate: null
   };
-  handleChange = event => {
+  handleRover = event => {
     const id = event.currentTarget.id;
     this.setState({ rover: id });
     console.log(this.state.rover);
@@ -22,50 +22,48 @@ export default class InfoPanel extends Component {
     this.setState({ setStartDate: date });
     const format = moment(date).format("YYYY-MM-DD");
     this.setState({ formattedDate: format });
-    console.log(this.state.formattedDate);
-  };
+    };
 
   render() {
     return (
       <div id="InfoPanel">
         <div className="InfoPanelContainer">
           <Row>
-            <h4 className="text-justify">Mars Rover Photos</h4>
-            <hr />
+            <Col lg={12}>
+              <h4 className="text-justify">Mars Rover Photos</h4>
+              <p>Select a <span className="deepsky">Mission</span> and <span className="deepsky">Earth Date</span> </p>
+            </Col>
           </Row>
           <Row>
-            <div>
-              {/* <p>Choose a Mission</p> */}
+            <Col lg={6}>
               <DropdownButton
                 variant="secondary"
                 id="dropdown-item-button"
                 title="Choose a Mission"
               >
                 <Dropdown.Item
-                  onClick={this.handleChange}
-                  id="curiosity"
+                  onClick={this.handleRover}
+                  id="Curiosity"
                   as="button"
                 >
                   Curiosity
                 </Dropdown.Item>
                 <Dropdown.Item
-                  onClick={this.handleChange}
-                  id="opportunity"
+                  onClick={this.handleRover}
+                  id="Opportunity"
                   as="button"
                 >
                   Opportunity
                 </Dropdown.Item>
                 <Dropdown.Item
-                  onClick={this.handleChange}
-                  id="spirit"
+                  onClick={this.handleRover}
+                  id="Spirit"
                   as="button"
                 >
                   Spirit
                 </Dropdown.Item>
               </DropdownButton>
-            </div>
-          </Row>
-          <Row>
+            </Col>
             <Col lg={3} offset={2}>
               <div className="InfoPanelSection ">
                 <DatePicker
@@ -75,14 +73,16 @@ export default class InfoPanel extends Component {
                 />
               </div>
             </Col>
-            <Col lg={3}>
-              <div className="InfoPanelSection"></div>
-            </Col>
           </Row>
 
           <Row className="MissionDetails">
             <Col lg={12}>
-              <MissionDetails />
+              <hr></hr>
+
+              <MissionDetails
+                formattedDate={this.state.formattedDate}
+                rover={this.state.rover}
+              />
             </Col>
           </Row>
           {/* <hr /> */}
