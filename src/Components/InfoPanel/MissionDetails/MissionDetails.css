@@ -9,4 +9,5 @@
 
 .deepsky {
     color: deepskyblue;
+    text-transform: capitalize;
 }

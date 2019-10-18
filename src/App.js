@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import InfoPanel from './Components/InfoPanel/InfoPanel';
 import Photo from './Components/InfoPanel/MissionDetails/Photo/Photo';
@@ -10,6 +10,9 @@ function App() {
     <div className="App">
       <Photo />
       <InfoPanel />
+      <div className="nasa-logo">
+        <img src="./assets/images/nasa.png" alt=""/>
+      </div>
     </div>
   );
 }

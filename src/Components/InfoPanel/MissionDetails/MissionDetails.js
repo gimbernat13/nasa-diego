@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./MissionDetails.css";
 import axios from "axios";
-import Photo from "./Photo/Photo";
+// import Photo from "./Photo/Photo";
+import { connect } from "react-redux";
+
 const API_KEY = "XV3ByWizINpFWnvtkhbEupv6ejBkAL8jAcFSWKnW";
 
 class MissionDetails extends Component {
@@ -33,13 +35,13 @@ class MissionDetails extends Component {
       });
   }
   componentDidMount() {
-    console.log("component mounted");
+    // console.log("[Mission Details] Component mounted");
 
     this.fetchApiData();
   }
 
   componentDidUpdate() {
-    console.log("component updated");
+    console.log("[Mission Details] - Component updated");
     if (this.state.rover && this.state.rover !== this.props.rover) {
       this.setState({ rover: this.props.rover });
 
@@ -48,7 +50,7 @@ class MissionDetails extends Component {
     }
   }
   render() {
-    const manifest = this.state.manifest;
+    // const manifest = this.state.manifest;
     return (
       <div key={this.props.rover}>
         <h3 key={this.props.rover}><span  className="deepsky">{this.state.rover}</span> Rover</h3>
@@ -66,5 +68,25 @@ class MissionDetails extends Component {
   }
 }
 
-export default MissionDetails;
+const mapStateToProps = (state) => {
+  return {
+    selectedMission: state.selectedMission,
+    selectedDate: state.selectedDate,
+    selectedCamera: state.selectedCamera,
+    missionPhotos: state.missionPhotos,
+  }
+
+}
+
+
+export default connect(mapStateToProps, {})(MissionDetails)
+
+
+
+
+
+
+
+
+
 // https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?manifests/curiosity&api_key=XV3ByWizINpFWnvtkhbEupv6ejBkAL8jAcFSWKnW
