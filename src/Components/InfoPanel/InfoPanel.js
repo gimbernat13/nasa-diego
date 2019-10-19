@@ -155,7 +155,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onSelectedMission: roverId => dispatch(actionCreators.getMission(roverId)),
     onSelectedDate: date => dispatch(actionCreators.getDate(date)),
-    onSelectedCamera: cameraId => dispatch(actionCreators.finalRequest(cameraId))
+    onSelectedCamera: cameraId => dispatch(actionCreators.getCamera(cameraId))
   };
 };
 

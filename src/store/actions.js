@@ -17,6 +17,20 @@ export const reqCamera = cameraId => {
     payload: cameraId
   };
 };
+export const getCamera = cameraId => {
+  return {
+    type: GET_CAMERA,
+    payload: cameraId
+  };
+};
+const finalStuff = image => {
+  return {
+    type: "FINAL_STUFF",
+    payload: image
+
+  }
+}
+
 
 const fetchApiData= () => {
   axios
@@ -33,12 +47,6 @@ const fetchApiData= () => {
     });
 }
 
-export const finalRequest = (roverId , cameraId , date)  => {
-  return dispatch => {
-
-
-  };
-};
 
 export const getDate = date => {
   console.log(date);

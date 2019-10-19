@@ -57,7 +57,7 @@ class Photos extends Component {
         <p>Selected Camera: 
          <span className="deepsky">{this.props.selectedCamera} </span>
         </p>
-        <img style={{maxWidth:"400px", margin:"10px"}}src={this.state.photos} alt=""/>
+        {/* <img style={{maxWidth:"400px", margin:"10px"}}src={this.state.photos} alt=""/> */}
         {/* <img style={{maxWidth:"150px", margin:"10px"}}src={this.state.photos1} alt=""/> */}
         {/* <h4>Selected Mission: {this.props.selectedMission}</h4> */}
       </div>

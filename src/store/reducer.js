@@ -2,7 +2,7 @@ const initialState = {
   selectedMission: "Curiosity",
   missionManifest: "",
   selectedCamera: "RHAZ",
-  missionPhotos: "",
+  missionPhoto: "",
   missionDate:"2017-10-01"
 };
 
@@ -31,6 +31,11 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           selectedCamera: action.payload
+        }
+      case "FINAL_STUFF": 
+        return {
+          ...state,
+          missionPhoto: action.payload
         }
       
 
