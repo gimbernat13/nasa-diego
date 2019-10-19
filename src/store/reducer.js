@@ -1,9 +1,9 @@
 const initialState = {
-  selectedMission: "spirit",
+  selectedMission: "Curiosity",
   missionManifest: "",
-  selectedCamera: "FHAZZ",
+  selectedCamera: "RHAZ",
   missionPhotos: "",
-  missionDate:"cagadanegra"
+  missionDate:"2017-10-01"
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +27,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         missionDate: action.payload,     
       };
+      case "GET_CAMERA":
+        return {
+          ...state,
+          selectedCamera: action.payload
+        }
       
 
     default:

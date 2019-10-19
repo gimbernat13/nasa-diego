@@ -28,7 +28,7 @@ class MissionDetails extends Component {
         this.setState({ landingDate: manifest.landing_date });
         this.setState({ status: manifest.status });
         this.setState({ totalPhotos: manifest.total_photos });
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(error => {
         console.log(error);

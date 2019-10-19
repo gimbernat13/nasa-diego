@@ -7,7 +7,7 @@ import { Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import MissionDetails from "./MissionDetails/MissionDetails";
 import { connect } from "react-redux";
 // import * as actionTypes from "../../store/actions"
-import * as actionCreators from "../../store/actions"
+import * as actionCreators from "../../store/actions";
 import Photos from "./MissionDetails/Photos";
 
 let cagadademierda = null;
@@ -15,8 +15,7 @@ let cagadademierda = null;
 class InfoPanel extends Component {
   state = {
     rover: "Curiosity",
-    startDate: new Date(),
-    setStartDate: new Date(),
+    startDate: new Date(2016, 11, 24),
     formattedDate: null
   };
   handleRover = event => {
@@ -26,9 +25,10 @@ class InfoPanel extends Component {
   };
   setDate = date => {
     const format = moment(date).format("YYYY-MM-DD");
-    console.log(format)
-    cagadademierda = format
-    return format
+    console.log(format);
+    this.setState({formattedDate:format})
+    cagadademierda = format;
+    return format;
   };
 
   render() {
@@ -38,18 +38,31 @@ class InfoPanel extends Component {
           <Row>
             <Col lg={12}>
               <h4 className="text-justify">Mars Rover Photos</h4>
+              {/* <span>Powered by NASA API</span> */}
               <p>
-                Select a <span className="deepsky">Mission</span> and{" "}
-                <span className="deepsky">Earth Date</span>{" "}
+                Select a <span className="deepsky">Mission</span> a{" "}
+                <span className="deepsky">Camera </span>and
+                <span className="deepsky"> Earth Date</span> to view mission's photos.
               </p>
+              <span>Cameras:</span>
+              <ul>
+                <li>
+                  <span className="deepsky">FHAZ</span> - Front Hazard Avoidance
+                  Camera
+                </li>
+                <li>
+                  <span className="deepsky">RHAZ</span> - Rear Hazard Avoidance
+                  Camera
+                </li>
+              </ul>
             </Col>
           </Row>
           <Row>
-            <Col lg={6}>
+            <Col lg={4}>
               <DropdownButton
                 variant="secondary"
                 id="dropdown-item-button"
-                title="Choose a Mission"
+                title="Choose Mission"
               >
                 <Dropdown.Item
                   onClick={() => this.props.onSelectedMission("Curiosity")}
@@ -74,32 +87,55 @@ class InfoPanel extends Component {
                 </Dropdown.Item>
               </DropdownButton>
             </Col>
-            <Col lg={3} offset={2}>
+            <Col lg={4}>
+              <DropdownButton
+                variant="secondary"
+                id="dropdown-item-button"
+                title="Choose Camera"
+              >
+                <Dropdown.Item
+                  onClick={() => this.props.onSelectedCamera("FHAZ")}
+                  id="FHAZ"
+                  as="button"
+                >
+                  FHAZ
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => this.props.onSelectedCamera("RHAZ")}
+                  id="FHAZ"
+                  as="button"
+                >
+                  RHAZ
+                </Dropdown.Item>
+              </DropdownButton>
+            </Col>
+          </Row>
+          <Row>
+            <Col lg={5}>
               <div className="InfoPanelSection ">
+              <span>Choose Date: </span>
                 <DatePicker
                   dateFormat="yyyy/MM/dd"
                   selected={this.state.startDate}
-                  onChange={(date) => this.props.onSelectedDate(this.setDate(date))}
+                  onChange={date => this.props.onSelectedDate(this.setDate(date))
+                  }
                 />
               </div>
             </Col>
           </Row>
           <Row className="MissionDetails">
             <Col lg={12}>
+               
+           
               <hr></hr>
               <MissionDetails
                 formattedDate={this.state.formattedDate}
                 rover={this.props.selectedMission}
               />
+
               <Photos />
             </Col>
           </Row>
-          <div className="nasa-logo">
-            <span>
-              {/* Powered By: <img src="./assets/images/nasa.png" alt="" /> */}
-            </span>
-          </div>
-          {/* <hr /> */}
         </div>
       </div>
     );
@@ -118,7 +154,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onSelectedMission: roverId => dispatch(actionCreators.getMission(roverId)),
-    onSelectedDate: date => dispatch(actionCreators.getDate(date))
+    onSelectedDate: date => dispatch(actionCreators.getDate(date)),
+    onSelectedCamera: cameraId => dispatch(actionCreators.finalRequest(cameraId))
   };
 };
 

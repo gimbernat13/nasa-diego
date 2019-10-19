@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Photo.css";
-export default class Photo extends Component {
+import { connect } from "react-redux";
+
+ class Photo extends Component {
   render() {
     const roverImage =
       "https://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/fcam/FRB_486265257EDR_F0481570FHAZ00323M_.JPG";
@@ -14,3 +16,14 @@ export default class Photo extends Component {
     );
   }
 }
+
+
+const mapStateToProps = state => {
+  return {
+    missionDate: state.missionDate,
+    selectedMission: state.selectedMission,
+    selectedCamera: state.selectedCamera,
+  };
+};
+
+export default connect(mapStateToProps)(Photo);
