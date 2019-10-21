@@ -1,9 +1,9 @@
 const initialState = {
   selectedMission: "Curiosity",
   missionManifest: "",
-  selectedCamera: "RHAZ",
+  selectedCamera: "FHAZ",
   missionPhoto: "",
-  missionDate:"2017-10-01",
+  missionDate:"2012-08-06",
   
 };
 

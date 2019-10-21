@@ -2,17 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import * as actionCreators from "../../../store/actions";
-import {Button} from "react-bootstrap"
+import { Button } from "react-bootstrap";
 const API_KEY = "XV3ByWizINpFWnvtkhbEupv6ejBkAL8jAcFSWKnW";
 
 class Photos extends Component {
   state = {
     selectedMission: this.props.selectedMission,
     missionDate: this.props.missionDate,
+    selectedCamera: this.props.selectedCamera,
     photos: null,
     photos1: null
   };
-  fetchApiData(dispatch) {
+  fetchApiData() {
     axios
       .get(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${this.props.selectedMission}/photos?earth_date=${this.props.missionDate}&camera=${this.props.selectedCamera}&api_key=${API_KEY}`
@@ -24,7 +25,7 @@ class Photos extends Component {
         const imgSrc1 = response.data.photos[1].img_src;
         this.setState({ photos: imgSrc });
         this.setState({ photos1: imgSrc1 });
-
+        return imgSrc
         console.log(response.data);
       })
       .catch(error => {
@@ -44,8 +45,19 @@ class Photos extends Component {
     ) {
       this.setState({ missionDate: this.props.missionDate });
 
-      console.log("[Shitt updated]");
+      console.log("[updated]");
 
+      this.fetchApiData();
+      this.props.onSelectedImage(this.state.photos)
+    }
+    if (
+      this.state.selectedCamera &&
+      this.state.selectedCamera !== this.props.selectedCamera
+    ) {
+      this.setState({ selectedCamera: this.props.selectedCamera });
+
+      console.log("[Shitt updated]");
+      this.props.onSelectedImage(this.state.photos)
       this.fetchApiData();
     }
   }
@@ -62,9 +74,9 @@ class Photos extends Component {
           <span className="deepsky">{this.props.selectedCamera} </span>
         </p>
 
-        <Button onClick={() => this.props.onSelectedImage(this.state.photos)}>
+        {/* <Button onClick={() => this.props.onSelectedImage(this.state.photos)}>
           Get your mars Rover Photo
-        </Button>
+        </Button> */}
       </div>
     );
   }

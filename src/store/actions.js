@@ -11,17 +11,13 @@ const reqDate = date => {
     payload: date
   };
 };
-export const reqCamera = cameraId => {
-  return {
-    type: GET_CAMERA,
-    payload: cameraId
-  };
-};
+
 export const getCamera = cameraId => {
   return {
     type: GET_CAMERA,
     payload: cameraId
   };
+  
 };
 export const finalStuff = image => {
   return {
@@ -52,6 +48,7 @@ export const getDate = date => {
   console.log(date);
   return dispatch => {
     dispatch(reqDate(date));
+    
   };
 };
 

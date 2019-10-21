@@ -37,59 +37,13 @@ class InfoPanel extends Component {
     return (
       <div id="InfoPanel">
         <div className="InfoPanelContainer">
-          <Row>
-            <Col lg={12}>
-              <h4 className="text-justify">Mars Rover Photos</h4>
-              {/* <span>Powered by NASA API</span> */}
-              <p>
-                Select a <span className="deepsky">Mission</span> a{" "}
-                <span className="deepsky">Camera </span>and
-                <span className="deepsky"> Earth Date</span> to view mission's photos.
-              </p>
-              <span>Cameras:</span>
-              <ul>
-                <li>
-                  <span className="deepsky">FHAZ</span> - Front Hazard Avoidance
-                  Camera
-                </li>
-                <li>
-                  <span className="deepsky">RHAZ</span> - Rear Hazard Avoidance
-                  Camera
-                </li>
-              </ul>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={4}>
-              <DropdownButton
-                variant="secondary"
-                id="dropdown-item-button"
-                title="Choose Mission"
-              >
-                <Dropdown.Item
-                  onClick={() => this.props.onSelectedMission("Curiosity")}
-                  id="Curiosity"
-                  as="button"
-                >
-                  Curiosity
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => this.props.onSelectedMission("Opportunity")}
-                  id="Opportunity"
-                  as="button"
-                >
-                  Opportunity
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => this.props.onSelectedMission("Spirit")}
-                  id="Spirit"
-                  as="button"
-                >
-                  Spirit
-                </Dropdown.Item>
-              </DropdownButton>
-            </Col>
-            <Col lg={4}>
+        <Row>
+        <MissionDetails
+                formattedDate={this.state.formattedDate}
+                rover={this.props.selectedMission}
+              />
+
+            <Col lg={6}>
               <DropdownButton
                 variant="secondary"
                 id="dropdown-item-button"
@@ -109,12 +63,57 @@ class InfoPanel extends Component {
                 >
                   RHAZ
                 </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => this.props.onSelectedCamera("CHEMCAM")}
+                  id="CHEMCAM"
+                  as="button"
+                >
+                  CHEMCAM
+                </Dropdown.Item>
+
+
+
+                <Dropdown.Item
+                  onClick={() => this.props.onSelectedCamera("MAHLI")}
+                  id="MAHLI"
+                  as="button"
+                >
+                  MAHLI
+                </Dropdown.Item>
+
+
+
+                <Dropdown.Item
+                  onClick={() => this.props.onSelectedCamera("MARDI")}
+                  id="MARDI"
+                  as="button"
+                >
+                  MARDI
+                </Dropdown.Item>
+
+
+
+                <Dropdown.Item
+                  onClick={() => this.props.onSelectedCamera("NAVCAM")}
+                  id="NAVCAM"
+                  as="button"
+                >
+                  NAVCAM
+                </Dropdown.Item>
               </DropdownButton>
             </Col>
+       
+           
     
           </Row>
           <Row>
-          <Date />
+            <Col lg={6}>
+            <p>Select a Date</p>
+            <Date />
+            </Col>
+            </Row>
+          <Row>
+     
 
           </Row>
           <Row className="MissionDetails">
@@ -122,11 +121,7 @@ class InfoPanel extends Component {
                
            
               <hr></hr>
-              <MissionDetails
-                formattedDate={this.state.formattedDate}
-                rover={this.props.selectedMission}
-              />
-
+          
               <Photos />
             </Col>
           </Row>

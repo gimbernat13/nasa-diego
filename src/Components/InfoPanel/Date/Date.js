@@ -13,7 +13,7 @@ class Date extends Component {
   state = {
     startDate: "",
     endDate: "",
-    date:  moment("2015/12/12"),
+    date:  moment("2012-08-06"),
     enable:true,
   };
 

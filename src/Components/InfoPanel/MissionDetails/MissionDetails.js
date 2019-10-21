@@ -26,6 +26,8 @@ class MissionDetails extends Component {
         this.setState({ manifest: manifest });
         this.setState({ launchDate: manifest.launch_date });
         this.setState({ landingDate: manifest.landing_date });
+        this.setState({ maxDate: manifest.max_date });
+
         this.setState({ status: manifest.status });
         this.setState({ totalPhotos: manifest.total_photos });
         // console.log(response.data);
@@ -58,6 +60,7 @@ class MissionDetails extends Component {
         <ul>
           <li>Launch Date: {this.state.launchDate} </li>
           <li>Landing Date: {this.state.landingDate} </li>
+          <li>Max Date: {this.state.maxDate} </li>
           <li>Total photos taken by Rover: {this.state.totalPhotos} </li>
           {/* <li key={this.props.rover} >Status:{this.state.manifest.status}  </li> */}
           <li className="status">Mission Status: {this.state.status} </li>
