@@ -31,7 +31,7 @@
 
    <Row>
             <Col lg={12}>
-              <h4 className="text-justify">Mars Rover Photos</h4>
+              <h4 className="text-justify">Mars Curiosity Rover Photos</h4>
               {/* <span>Powered by NASA API</span> */}
               <p>
                 Select a <span className="deepsky">Mission</span> a{" "}

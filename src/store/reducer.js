@@ -3,7 +3,7 @@ const initialState = {
   missionManifest: "",
   selectedCamera: "FHAZ",
   missionPhoto: "",
-  missionDate:"2012-08-06",
+  missionDate:"2014-08-06",
   
 };
 

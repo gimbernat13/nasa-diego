@@ -25,11 +25,15 @@ class Photos extends Component {
         const imgSrc1 = response.data.photos[1].img_src;
         this.setState({ photos: imgSrc });
         this.setState({ photos1: imgSrc1 });
-        return imgSrc
+
+        this.props.onSelectedImage(imgSrc);
         console.log(response.data);
       })
       .catch(error => {
         console.log("[Data Fetching Error]", error);
+        alert(
+          "No photos for your current choice (Some cameras don't send photos daily) verify date is within mission's range"
+        );
       });
   }
 
@@ -38,7 +42,7 @@ class Photos extends Component {
   }
 
   componentDidUpdate() {
-    console.log("[Mission Details] - Component updated");
+    // console.log("[Mission Details] - Component updated");
     if (
       this.state.missionDate &&
       this.state.missionDate !== this.props.missionDate
@@ -48,7 +52,7 @@ class Photos extends Component {
       console.log("[updated]");
 
       this.fetchApiData();
-      this.props.onSelectedImage(this.state.photos)
+      this.props.onSelectedImage(this.state.photos);
     }
     if (
       this.state.selectedCamera &&
@@ -56,8 +60,6 @@ class Photos extends Component {
     ) {
       this.setState({ selectedCamera: this.props.selectedCamera });
 
-      console.log("[Shitt updated]");
-      this.props.onSelectedImage(this.state.photos)
       this.fetchApiData();
     }
   }

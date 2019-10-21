@@ -43,7 +43,7 @@ class MissionDetails extends Component {
   }
 
   componentDidUpdate() {
-    console.log("[Mission Details] - Component updated");
+    // console.log("[Mission Details] - Component updated");
     if (this.state.rover && this.state.rover !== this.props.rover) {
       this.setState({ rover: this.props.rover });
 
