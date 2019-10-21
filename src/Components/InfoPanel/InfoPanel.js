@@ -111,21 +111,11 @@ class InfoPanel extends Component {
                 </Dropdown.Item>
               </DropdownButton>
             </Col>
-            <Date />
+    
           </Row>
           <Row>
-     
-            <Col lg={5}>
-              <div className="InfoPanelSection ">
-              <span>Choose Date: </span>
-                <DatePicker
-                  dateFormat="yyyy/MM/dd"
-                  selected={this.state.startDate}
-                  onChange={date => this.props.onSelectedDate(this.setDate(date))
-                  }
-                />
-              </div>
-            </Col>
+          <Date />
+
           </Row>
           <Row className="MissionDetails">
             <Col lg={12}>
