@@ -12,7 +12,7 @@ import Photos from "./MissionDetails/Photos";
 
 import Date from "./Date/Date";
 
-
+let cagadademierda = null;
 
 class InfoPanel extends Component {
   state = {

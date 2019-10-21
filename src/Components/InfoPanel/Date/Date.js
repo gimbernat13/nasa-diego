@@ -13,14 +13,21 @@ class Date extends Component {
   state = {
     startDate: "",
     endDate: "",
-    date:  moment("2019/12/12"),
+    date:  moment("2015/12/12"),
     enable:true,
   };
+
+  changeDate = (date) => {
+      this.setState({date})
+      return moment(date).format("YYYY-MM-DD");
+  }
   render() {
     return (
       <SingleDatePicker
         date={this.state.date} // momentPropTypes.momentObj or null
         onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+        onDateChange={date => this.props.onSelectedDate(this.changeDate(date))}
+        onChange={date => this.props.onSelectedDate(this.setDate(date))}
         focused={this.state.focused} // PropTypes.bool
         onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
         id="your_unique_id" // PropTypes.string.isRequired,
