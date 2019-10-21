@@ -9,13 +9,14 @@ import { connect } from "react-redux";
 // import * as actionTypes from "../../store/actions"
 import * as actionCreators from "../../store/actions";
 import Photos from "./MissionDetails/Photos";
+import Date from "./Date/Date"
 
 let cagadademierda = null;
 
 class InfoPanel extends Component {
   state = {
     rover: "Curiosity",
-    startDate: new Date(2016, 11, 24),
+    // startDate: new Date(),
     formattedDate: null
   };
   handleRover = event => {
@@ -111,6 +112,7 @@ class InfoPanel extends Component {
             </Col>
           </Row>
           <Row>
+            <Date />
             <Col lg={5}>
               <div className="InfoPanelSection ">
               <span>Choose Date: </span>
