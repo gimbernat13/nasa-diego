@@ -3,7 +3,8 @@ const initialState = {
   missionManifest: "",
   selectedCamera: "RHAZ",
   missionPhoto: "",
-  missionDate:"2017-10-01"
+  missionDate:"2017-10-01",
+  
 };
 
 const reducer = (state = initialState, action) => {

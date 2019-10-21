@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Photo.css";
 import { connect } from "react-redux";
 import axios from "axios"
+// import * as actionCreators from "../../../../store/actions"
+
 const API_KEY = "XV3ByWizINpFWnvtkhbEupv6ejBkAL8jAcFSWKnW";
 
  class Photo extends Component {
@@ -21,6 +23,7 @@ const API_KEY = "XV3ByWizINpFWnvtkhbEupv6ejBkAL8jAcFSWKnW";
         const imgSrc1 = response.data.photos[1].img_src;
         this.setState({ photos: imgSrc });
         this.setState({ photos1: imgSrc1 });
+
         console.log(response.data);
       })
       .catch(error => {
@@ -48,7 +51,7 @@ const API_KEY = "XV3ByWizINpFWnvtkhbEupv6ejBkAL8jAcFSWKnW";
 
   render() {
     return (
-      <div key={this.props.missionDate} style={{ backgroundImage: `url(${this.state.photos}`, backgroundSize:"cover" }} id="photo">
+      <div key={this.props.missionDate} style={{ backgroundImage: `url(${this.props.missionPhoto}`, backgroundSize:"cover" }} id="photo">
         <div className="container">
            {/* <h4>Photo:</h4> */}
 
@@ -64,7 +67,9 @@ const mapStateToProps = state => {
     missionDate: state.missionDate,
     selectedMission: state.selectedMission,
     selectedCamera: state.selectedCamera,
+    missionPhoto: state.missionPhoto
   };
 };
 
-export default connect(mapStateToProps)(Photo);
+
+export default connect(mapStateToProps  )(Photo);

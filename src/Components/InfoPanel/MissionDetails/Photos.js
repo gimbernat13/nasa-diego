@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import * as actionCreators from "../../../store/actions";
+import {Button} from "react-bootstrap"
 const API_KEY = "XV3ByWizINpFWnvtkhbEupv6ejBkAL8jAcFSWKnW";
 
 class Photos extends Component {
@@ -8,9 +10,9 @@ class Photos extends Component {
     selectedMission: this.props.selectedMission,
     missionDate: this.props.missionDate,
     photos: null,
-    photos1: null,
+    photos1: null
   };
-  fetchApiData() {
+  fetchApiData(dispatch) {
     axios
       .get(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${this.props.selectedMission}/photos?earth_date=${this.props.missionDate}&camera=${this.props.selectedCamera}&api_key=${API_KEY}`
@@ -22,10 +24,11 @@ class Photos extends Component {
         const imgSrc1 = response.data.photos[1].img_src;
         this.setState({ photos: imgSrc });
         this.setState({ photos1: imgSrc1 });
+
         console.log(response.data);
       })
       .catch(error => {
-        console.log("[Data Fetching Error]",error);
+        console.log("[Data Fetching Error]", error);
       });
   }
 
@@ -39,7 +42,7 @@ class Photos extends Component {
       this.state.missionDate &&
       this.state.missionDate !== this.props.missionDate
     ) {
-        this.setState({ missionDate: this.props.missionDate });
+      this.setState({ missionDate: this.props.missionDate });
 
       console.log("[Shitt updated]");
 
@@ -54,12 +57,14 @@ class Photos extends Component {
           Selected date:
           <span className="deepsky"> {this.props.missionDate}</span>
         </p>
-        <p>Selected Camera: 
-         <span className="deepsky">{this.props.selectedCamera} </span>
+        <p>
+          Selected Camera:
+          <span className="deepsky">{this.props.selectedCamera} </span>
         </p>
-        {/* <img style={{maxWidth:"400px", margin:"10px"}}src={this.state.photos} alt=""/> */}
-        {/* <img style={{maxWidth:"150px", margin:"10px"}}src={this.state.photos1} alt=""/> */}
-        {/* <h4>Selected Mission: {this.props.selectedMission}</h4> */}
+
+        <Button onClick={() => this.props.onSelectedImage(this.state.photos)}>
+          Get your mars Rover Photo
+        </Button>
       </div>
     );
   }
@@ -69,8 +74,19 @@ const mapStateToProps = state => {
   return {
     missionDate: state.missionDate,
     selectedMission: state.selectedMission,
-    selectedCamera: state.selectedCamera,
+    selectedCamera: state.selectedCamera
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onSelectedImage: image => dispatch(actionCreators.finalStuff(image)),
+    onSelectedMission: roverId => dispatch(actionCreators.getMission(roverId)),
+    onSelectedDate: date => dispatch(actionCreators.getDate(date)),
+    onSelectedCamera: cameraId => dispatch(actionCreators.getCamera(cameraId))
   };
 };
 
-export default connect(mapStateToProps)(Photos);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Photos);

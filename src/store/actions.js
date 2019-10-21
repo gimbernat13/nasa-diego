@@ -23,7 +23,7 @@ export const getCamera = cameraId => {
     payload: cameraId
   };
 };
-const finalStuff = image => {
+export const finalStuff = image => {
   return {
     type: "FINAL_STUFF",
     payload: image
