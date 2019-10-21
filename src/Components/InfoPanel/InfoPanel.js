@@ -9,9 +9,10 @@ import { connect } from "react-redux";
 // import * as actionTypes from "../../store/actions"
 import * as actionCreators from "../../store/actions";
 import Photos from "./MissionDetails/Photos";
-import Date from "./Date/Date"
 
-let cagadademierda = null;
+import Date from "./Date/Date";
+
+
 
 class InfoPanel extends Component {
   state = {
@@ -28,7 +29,7 @@ class InfoPanel extends Component {
     const format = moment(date).format("YYYY-MM-DD");
     console.log(format);
     this.setState({formattedDate:format})
-    cagadademierda = format;
+ 
     return format;
   };
 
@@ -110,9 +111,10 @@ class InfoPanel extends Component {
                 </Dropdown.Item>
               </DropdownButton>
             </Col>
+            <Date />
           </Row>
           <Row>
-            <Date />
+     
             <Col lg={5}>
               <div className="InfoPanelSection ">
               <span>Choose Date: </span>

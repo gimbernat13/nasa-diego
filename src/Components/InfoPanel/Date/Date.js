@@ -1,38 +1,56 @@
-import React, {useState, setShow} from 'react'
-import {Modal, Button} from "react-bootstrap"
-
-
-
-const Date = () => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-  
+import "react-dates/initialize";
+import {
+  DateRangePicker,
+  SingleDatePicker,
+  DayPickerRangeController
+} from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
+import moment from "moment";
+import { connect } from "react-redux";
+import * as actionCreators from "../../../store/actions";
+import React, { Component } from "react";
+class Date extends Component {
+  state = {
+    startDate: "",
+    endDate: "",
+    date:  moment("2019/12/12"),
+    enable:true,
+  };
+  render() {
     return (
-      <>
-        <Button variant="primary" onClick={handleShow}>
-          Launch demo modal
-        </Button>
+      <SingleDatePicker
+        date={this.state.date} // momentPropTypes.momentObj or null
+        onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+        focused={this.state.focused} // PropTypes.bool
+        onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+        id="your_unique_id" // PropTypes.string.isRequired,
+        isOutsideRange = {() => false}
   
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
+      />
     );
   }
-  
- 
+}
 
-export default Date
+const mapStateToProps = state => {
+    return {
+      selectedMission: state.selectedMission,
+      missionDate: state.selectedDate,
+      selectedCamera: state.selectedCamera,
+      missionPhotos: state.missionPhotos
+    };
+  };
+  // { type: actionTypes.GET_MISSION, payload: roverId }
+  const mapDispatchToProps = dispatch => {
+    return {
+      onSelectedMission: roverId => dispatch(actionCreators.getMission(roverId)),
+      onSelectedDate: date => dispatch(actionCreators.getDate(date)),
+      onSelectedCamera: cameraId => dispatch(actionCreators.getCamera(cameraId))
+    };
+  };
+  
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Date);
+  
